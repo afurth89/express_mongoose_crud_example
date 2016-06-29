@@ -1,12 +1,21 @@
 const express = require('express')
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const app = express();
 
 
-// mongoose.connect('mongodb://localhost/myappdatabase');
+mongoose.connect('mongodb://localhost/mongoBooks');
 
-app.get('/', (req, res) => {
-  res.send("Hello World")
+var bookSchema = new mongoose.Schema({
+                    title: String,
+                    author: String
+                  });
+
+mongoose.model('books', bookSchema)
+
+app.get('/books', (req, res) => {
+  mongoose.model('books').find(function(err, books) {
+    res.send(books);
+  })
 })
 
 app.listen(3000, function() {
