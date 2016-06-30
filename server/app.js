@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose');
 const app = express();
 
+app.set('view engine', 'ejs');
 
 mongoose.connect('mongodb://localhost/mongoBooks');
 
@@ -14,7 +15,7 @@ mongoose.model('books', bookSchema)
 
 app.get('/books', (req, res) => {
   mongoose.model('books').find(function(err, books) {
-    res.send(books);
+    res.render('index', {books: books});
   })
 })
 

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mongo Books - Index</title>
+</head>
+<body>
+  <h1>Mongo Books Index</h1>
+  <ul>
+  <% for (var i = 0; i < books.length; i++) { %>
+    <li><%= books[i].title %> by <%= books[i].author %></li>
+  <% } %>
+  </ul>
+</body>
+</html>
