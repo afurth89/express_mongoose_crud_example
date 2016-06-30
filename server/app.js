@@ -67,7 +67,7 @@ app.put('/books/:id', (req, res) => {
     }, function(err, book) {
       if (err) {
         console.log(err)
-        res.render(edit)
+        res.render('edit')
       } 
       else {
         res.redirect('/books')
@@ -76,7 +76,17 @@ app.put('/books/:id', (req, res) => {
 })
 
 // DELETE
-
+app.delete('/books/:id', (req, res) => {
+  mongoose.model('books').findByIdAndRemove(req.params.id, function(err, book) {
+    if (err) {
+      console.log(err)
+      res.render('show')
+    } 
+    else {
+      res.redirect('/books')
+    }
+  })
+})
 
 // CATCH-ALL
 app.get('*', (req, res) => {
