@@ -27,6 +27,20 @@ app.get('/books/new', (req, res) => {
   res.render('new')
 })
 
+
+app.post('/books', (req, res) => {
+  mongoose.model('books').create({title: req.body.title, author: req.body.author}, function(err, book) {
+    if (err) {
+      console.log(err)
+      res.redirect('/books/new')
+    }
+    else {
+      console.log("NEW BOOK: ", book)
+      res.redirect('/books')
+    }
+  })
+})
+
 app.get('*', (req, res) => {
   res.redirect('/books')
 })
