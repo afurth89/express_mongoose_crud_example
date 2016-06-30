@@ -59,7 +59,21 @@ app.post('/books', (req, res) => {
 })
 
 // UPDATE
-
+app.put('/books/:id', (req, res) => {
+  mongoose.model('books')
+    .findByIdAndUpdate(req.params.id, {
+      title: req.body.title,
+      author: req.body.author
+    }, function(err, book) {
+      if (err) {
+        console.log(err)
+        res.render(edit)
+      } 
+      else {
+        res.redirect('/books')
+      }
+    })
+})
 
 // DELETE
 
