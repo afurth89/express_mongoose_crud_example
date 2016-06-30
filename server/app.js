@@ -3,23 +3,15 @@ const mongoose = require('mongoose');
 const app = express();
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+const db = require('./models')
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
 
-mongoose.connect('mongodb://localhost/mongoBooks');
-
-var bookSchema = new mongoose.Schema({
-                    title: String,
-                    author: String
-                  });
-
-mongoose.model('books', bookSchema)
-
 // INDEX
 app.get('/books', (req, res) => {
-  mongoose.model('books').find(function(err, books) {
+  db.Book.find(function(err, books) {
     res.render('index', {books: books});
   })
 })
@@ -31,7 +23,7 @@ app.get('/books/new', (req, res) => {
 
 // SHOW
 app.get('/books/:id', (req, res) => {
-  mongoose.model('books').findById(req.params.id, function(err, book) {
+  db.Book.findById(req.params.id, function(err, book) {
     res.render('show', {book:book})
   })
 })
@@ -39,14 +31,14 @@ app.get('/books/:id', (req, res) => {
 
 // EDIT
 app.get('/books/:id/edit', (req, res) => {
-  mongoose.model('books').findById(req.params.id, function(err, book) {
+  db.Book.findById(req.params.id, function(err, book) {
     res.render('edit', {book:book})
   })
 })
 
 // CREATE
 app.post('/books', (req, res) => {
-  mongoose.model('books').create({title: req.body.title, author: req.body.author}, function(err, book) {
+  db.Book.create({title: req.body.title, author: req.body.author}, function(err, book) {
     if (err) {
       console.log(err)
       res.redirect('/books/new')
@@ -60,7 +52,7 @@ app.post('/books', (req, res) => {
 
 // UPDATE
 app.put('/books/:id', (req, res) => {
-  mongoose.model('books')
+  db.Book
     .findByIdAndUpdate(req.params.id, {
       title: req.body.title,
       author: req.body.author
@@ -77,7 +69,7 @@ app.put('/books/:id', (req, res) => {
 
 // DELETE
 app.delete('/books/:id', (req, res) => {
-  mongoose.model('books').findByIdAndRemove(req.params.id, function(err, book) {
+  db.Book.findByIdAndRemove(req.params.id, function(err, book) {
     if (err) {
       console.log(err)
       res.render('show')
