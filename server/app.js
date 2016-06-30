@@ -1,8 +1,12 @@
 const express = require('express')
 const mongoose = require('mongoose');
 const app = express();
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 
 app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(methodOverride('_method'));
 
 mongoose.connect('mongodb://localhost/mongoBooks');
 
