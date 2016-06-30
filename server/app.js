@@ -32,20 +32,16 @@ app.get('/books/new', (req, res) => {
 // SHOW
 app.get('/books/:id', (req, res) => {
   mongoose.model('books').findById(req.params.id, function(err, book) {
-    if (err) {
-      console.log(err)
-      res.redirect('/books')
-    }
-    else {
-      res.render('show', {book:book})
-    }
+    res.render('show', {book:book})
   })
 })
 
 
 // EDIT
 app.get('/books/:id/edit', (req, res) => {
-  
+  mongoose.model('books').findById(req.params.id, function(err, book) {
+    res.render('edit', {book:book})
+  })
 })
 
 // CREATE

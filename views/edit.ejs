@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit - Mongo Books</title>
+</head>
+<body>
+  <h1>Lemme see your books!</h1>
+    <p>
+
+      <form action="/books/<%= book._id%>?_method=put" method="POST">
+      <div>
+         <label for="title">Title:</label>
+         <input autofocus type="text" name="title" id="title" value = "<%= book.title %>">
+       </div>
+       <div>
+         <label for="author">Author:</label>
+         <input autofocus type="text" name="author" id="author" value = "<%= book.author %>">
+       </div>
+       <div>
+         <input type="submit" value="Update">
+       </div>
+      </form>
+    </p>
+</body>
+</html>
