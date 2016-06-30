@@ -23,6 +23,15 @@ app.get('/books', (req, res) => {
   })
 })
 
+app.get('/books/new', (req, res) => {
+  res.render('new')
+})
+
+app.get('*', (req, res) => {
+  res.redirect('/books')
+})
+
+
 app.listen(3000, function() {
   console.log("Listening on port 3000...")
 });

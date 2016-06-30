@@ -5,6 +5,12 @@
   <title>Mongo Books - Add</title>
 </head>
 <body>
-  <form action="/books" method="POST"></form>
+  <form action="/books" method="POST">
+    <input type="text" name="book[name]" placeholder="Enter a title">
+    <input type="text" name="book[author]" placeholder="Enter an author">
+    <input type="submit" value="Add this Book">
+  </form>
+
+  <a href="/books">See All Books</a>
 </body>
 </html>
