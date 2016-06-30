@@ -8,7 +8,7 @@
   <h1>Mongo Books Index</h1>
   <ul>
   <% books.forEach(function(book) { %>
-    <li><%= book.title %> by <%= book.author %></li>
+    <li><a href="/books/<%= book._id %>"><%= book.title %></a> by <%= book.author %></li>
   <% }) %>
   </ul>
   <br>
